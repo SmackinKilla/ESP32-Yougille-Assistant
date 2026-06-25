@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "author": "Velxio",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "ili9341_1782366866510_05njx16ee",
+      "top": -57,
+      "left": 464,
+      "attrs": {
+        "flipHorizontal": false,
+        "flipVertical": false,
+        "rotation": 90
+      }
+    },
+    {
+      "type": "wokwi-ssd1306-i2c",
+      "id": "ssd1306_i2c_1782367232344_u4zs6bm9n",
+      "top": 236,
+      "left": 498,
+      "attrs": {
+        "protocol": "i2c",
+        "rotation": 0
+      }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht22_1782367604257_ed3xzjbx5",
+      "top": -35,
+      "left": 306,
+      "attrs": {
+        "rotation": 90,
+        "temperature": 25,
+        "humidity": 50
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "pushbutton_1782371276674_jr06xx0we",
+      "top": 318,
+      "left": 413,
+      "attrs": {
+        "color": "red",
+        "pressed": false,
+        "label": "",
+        "xray": false,
+        "rotation": 90
+      }
+    }
+  ],
+  "connections": [
+    [
+      "ili9341_1782366866510_05njx16ee:VCC",
+      "esp32:3V3",
+      "#cc0000",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:GND",
+      "esp32:GND2",
+      "#8B4513",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:CS",
+      "esp32:5",
+      "#22c55e",
+      []
+    ],
+    [
+      "esp32:15",
+      "esp32:15",
+      "#22c55e",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:RST",
+      "esp32:4",
+      "#22c55e",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:D/C",
+      "esp32:2",
+      "#22c55e",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:MOSI",
+      "esp32:23",
+      "#22c55e",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:SCK",
+      "esp32:18",
+      "#22c55e",
+      []
+    ],
+    [
+      "esp32:4",
+      "esp32:4",
+      "#22c55e",
+      []
+    ],
+    [
+      "ili9341_1782366866510_05njx16ee:LED",
+      "esp32:3V3",
+      "#cc0000",
+      []
+    ],
+    [
+      "ssd1306_i2c_1782367232344_u4zs6bm9n:DATA",
+      "esp32:21",
+      "cyan",
+      []
+    ],
+    [
+      "ssd1306_i2c_1782367232344_u4zs6bm9n:CLK",
+      "esp32:22",
+      "#FF00FF",
+      []
+    ],
+    [
+      "ssd1306_i2c_1782367232344_u4zs6bm9n:3V3",
+      "esp32:3V3",
+      "#cc0000",
+      []
+    ],
+    [
+      "ssd1306_i2c_1782367232344_u4zs6bm9n:GND",
+      "esp32:GND2",
+      "#8B4513",
+      []
+    ],
+    [
+      "dht22_1782367604257_ed3xzjbx5:VCC",
+      "esp32:3V3",
+      "#cc0000",
+      []
+    ],
+    [
+      "dht22_1782367604257_ed3xzjbx5:GND",
+      "esp32:GND2",
+      "#8B4513",
+      []
+    ],
+    [
+      "dht22_1782367604257_ed3xzjbx5:SDA",
+      "esp32:14",
+      "#22c55e",
+      []
+    ],
+    [
+      "esp32:33",
+      "esp32:33",
+      "#22c55e",
+      []
+    ],
+    [
+      "pushbutton_1782371276674_jr06xx0we:1.l",
+      "esp32:13",
+      "#22c55e",
+      []
+    ],
+    [
+      "pushbutton_1782371276674_jr06xx0we:2.r",
+      "esp32:GND2",
+      "#8B4513",
+      []
+    ]
+  ]
+}
