@@ -5,10 +5,10 @@
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
 #include "PageManager.h"
-
 #include "Page.h"
 #include "HomePage.h"
 #include "ScreenSaver.h"
+#include <string.h>
 
 #define TFT_CS    5    // Chip Select
 #define TFT_DC    16   // Data/Command
@@ -23,6 +23,7 @@
 #define OLED_RST  -1   // Пин Reset (если нет - ставим -1)
 
 #define BUTTON_PIN 4 
+
 
 bool lastButtonState = HIGH;      
 bool currentButtonState = HIGH;   
@@ -61,18 +62,8 @@ void loop() {
         if (reading != currentButtonState) {
             currentButtonState = reading;
             
-            // Кнопка нажата (LOW из-за INPUT_PULLUP)
             if (currentButtonState == LOW) {
-                Serial.println("Button pressed - switching page");
-                
-                // Переключаем страницу
-                Page* oldPage = pm.getCurrent();
-                oldPage->OnExit();
-                
-                pm.next();  // Переключение на следующую страницу
-                
-                Page* newPage = pm.getCurrent();
-                newPage->OnEnter();
+                pm.getCurrent()->onButtonPressed();
             }
         }
     }

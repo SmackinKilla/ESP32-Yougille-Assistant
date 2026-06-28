@@ -10,7 +10,7 @@ public:
         : _tft(tft), _oled(oled) {}
     
     virtual ~Page() = default;
-    
+    virtual void onButtonPressed() {} 
     virtual void OnEnter() {}
     virtual void Update(uint32_t deltaTimeMs) {}
     virtual void OnExit() {}
