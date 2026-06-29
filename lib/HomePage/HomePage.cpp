@@ -2,11 +2,11 @@
 #include "HomePage.h"
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
-#include <ColorPalette.h>
+#include "ColorPalette.h"
 
 void HomePage::onShortClick() {
     currentIndex++;
-    if (currentIndex >= 5) currentIndex = 1;
+    if (currentIndex >= 5) currentIndex = 0;
     previousIndex = -1;
 }
 
@@ -15,7 +15,7 @@ void HomePage::onLongClick() {
 }
 
 void HomePage::DrawGUI() {
-    _tft->fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_BLUE);
+    _tft->fillScreen(COLOR_BLUE);
     _tft->setCursor (2, 5);
     _tft->setTextSize(1);
     _tft->setTextColor(COLOR_WHITE);
@@ -32,9 +32,10 @@ void HomePage::DrawGUI() {
     _tft->print("Next ==>");
 }
 
+
 void HomePage::DrawMenu() {
-    for (int i = 1; i < 6; i++) {
-    int y = charStart + charOffset * (i - 1);
+    for (int i = 0; i < 5; i++) {
+    int y = charStart + charOffset * (i);
     
     if (i == currentIndex) {
         _tft->fillRect(0, y - 2, SCREEN_WIDTH, charOffset, COLOR_WHITE);

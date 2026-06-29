@@ -3,10 +3,10 @@
 
 class Adafruit_ST7735;
 class Adafruit_SSD1306;
-
+class PageManager;
 class Page {
 public:
-    Page(Adafruit_ST7735* tft, Adafruit_SSD1306* oled) 
+    Page(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm = nullptr) 
         : _tft(tft), _oled(oled), _pm(pm) {}  
     virtual ~Page() = default;
     virtual void onShortClick() {}
@@ -18,4 +18,5 @@ public:
 protected:
     Adafruit_ST7735* _tft;
     Adafruit_SSD1306* _oled;
+    PageManager* _pm; 
 };

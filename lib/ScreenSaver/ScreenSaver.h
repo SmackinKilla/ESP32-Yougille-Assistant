@@ -4,7 +4,7 @@
 
 class ScreenSaver : public Page {
 public:
-    ScreenSaver(Adafruit_ST7735* tft, Adafruit_SSD1306* oled) 
+    ScreenSaver(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
         : Page(tft, oled, pm) {}
     
     void OnEnter() override;

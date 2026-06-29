@@ -22,7 +22,7 @@ private:
     PageManager* pageManager;
     void DrawMenu();
     void DrawGUI();
-    int currentIndex = 1;
+    int currentIndex = 0;
     int previousIndex = -1;
     int charOffset = 10;
     int charStart = 18;
