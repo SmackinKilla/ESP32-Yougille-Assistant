@@ -39,11 +39,23 @@ void setup() {
     oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     button.setClickTicks(300u);
-    button.setPressTicks(500u); 
-    pm.addPage(&homePage);
-    pm.addPage(&screenSaver);
-    pm.getCurrent()->OnEnter();
-
+    button.setPressTicks(500u);  
+    button.attachClick([]() {
+        Serial.println("Short click");
+        pm.getCurrent()->onShortClick();
+    });
+    
+    button.attachLongPressStart([]() {
+        Serial.println("Long press");
+        pm.getCurrent()->onLongClick();
+    });      
+    pm.addPage(&homePage); 
+    pm.addPage(&weatherPage);    
+    pm.addPage(&tasksPage);      
+    pm.addPage(&timezonesPage);
+    pm.addPage(&gamblingPage);
+    pm.addPage(&settingsPage);
+    pm.SwitchToIndex(0);
 }
 
 void loop() {
