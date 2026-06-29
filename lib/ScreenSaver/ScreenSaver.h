@@ -5,7 +5,7 @@
 class ScreenSaver : public Page {
 public:
     ScreenSaver(Adafruit_ST7735* tft, Adafruit_SSD1306* oled) 
-        : Page(tft, oled) {}
+        : Page(tft, oled, pm) {}
     
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
