@@ -10,12 +10,12 @@ public:
         : _tft(tft), _oled(oled) {}
     
     virtual ~Page() = default;
-    virtual void onButtonPressed() {} 
+    virtual void onShortClick() {}
+    virtual void onLongClick() {}
     virtual void OnEnter() {}
     virtual void Update(uint32_t deltaTimeMs) {}
     virtual void OnExit() {}
     virtual void Draw() = 0;
-    
 protected:
     Adafruit_ST7735* _tft;
     Adafruit_SSD1306* _oled;
