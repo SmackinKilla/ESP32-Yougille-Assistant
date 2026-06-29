@@ -31,14 +31,6 @@ HomePage homePage(&tft, &oled, &pm);
 ScreenSaver screenSaver(&tft, &oled);
 
 
-extern "C" void app_main() {
-    setup();
-    for(;;) {
-        loop();
-        vTaskDelay(1);
-    }
-}
-
 void setup() {
     Serial.begin(115200);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
