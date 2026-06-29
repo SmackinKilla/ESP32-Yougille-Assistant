@@ -43,16 +43,16 @@ I'd be glad to receive your comments, corrections, and commits. You'll not only 
 4. DHT 22
 
 ## Что уже работает 
-- [x] Menu
-- [x] Page system (PageManager)
-- [ ] Return to home (in progress)
-- [ ] Screen Saver (in progress)
-- [ ] Weather page (in progress)
-- [ ] Tasks page (in progress)
-- [ ] Time zones (in progress)
-- [ ] Mini-games (in progress)
-- [ ] Settings (in progress)
-- [ ] DHT22 integration (in progress)
+- [x] Меню
+- [x] Система страниц (PageManager)
+- [ ] Возврат на главную из любой страницы (в работе)
+- [ ] Заставка (Screen Saver) (в работе)
+- [ ] Страница погоды (в работе)
+- [ ] Страница задач (в работе)
+- [ ] Часовые пояса (в работе)
+- [ ] Мини-игры (в работе)
+- [ ] Настройки (в работе)
+- [ ] Интеграция DHT22 (в работе)
 
 ## Libaries Used // Используемые библиотеки
 - [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
