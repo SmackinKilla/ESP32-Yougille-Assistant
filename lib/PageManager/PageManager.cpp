@@ -23,3 +23,13 @@ void PageManager::prev() {
 Page* PageManager::getCurrent() {
     return _pages[_currentIndex];
 }
+
+void PageManager::SwitchToIndex(int index) {
+    if (_pages.empty()) return;
+    if (index < 0 || index >= (int)_pages.size()) return;
+    if (index == _currentIndex) return; 
+    
+    _pages[_currentIndex]->OnExit();
+    _currentIndex = index;
+    _pages[_currentIndex]->OnEnter();
+}
