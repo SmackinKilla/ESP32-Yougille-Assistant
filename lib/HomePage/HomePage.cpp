@@ -6,13 +6,12 @@
 
 void HomePage::onShortClick() {
     currentIndex++;
-    if (currentIndex >= 5) currentIndex = 0;
+    if (currentIndex >= 5) currentIndex = 1;
     previousIndex = -1;
 }
 
 void HomePage::onLongClick() {
     pageManager->SwitchToIndex(currentIndex);
-    OnExit();
 }
 
 void HomePage::DrawGUI() {
@@ -34,8 +33,8 @@ void HomePage::DrawGUI() {
 }
 
 void HomePage::DrawMenu() {
-    for (int i = 0; i < 5; i++) {
-    int y = charStart + charOffset * i;
+    for (int i = 1; i < 6; i++) {
+    int y = charStart + charOffset * (i - 1);
     
     if (i == currentIndex) {
         _tft->fillRect(0, y - 2, SCREEN_WIDTH, charOffset, COLOR_WHITE);
