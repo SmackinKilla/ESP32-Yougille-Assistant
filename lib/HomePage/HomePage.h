@@ -9,7 +9,7 @@ const int SCREEN_HEIGHT = 128;
 class HomePage : public Page {
 public:
     HomePage(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
-        : Page(tft, oled) {}
+        : Page(tft, oled), pageManager(pm){}
 
     void onShortClick() override;
     void onLongClick() override;
