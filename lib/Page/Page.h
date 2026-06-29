@@ -7,8 +7,7 @@ class Adafruit_SSD1306;
 class Page {
 public:
     Page(Adafruit_ST7735* tft, Adafruit_SSD1306* oled) 
-        : _tft(tft), _oled(oled) {}
-    
+        : _tft(tft), _oled(oled), _pm(pm) {}  
     virtual ~Page() = default;
     virtual void onShortClick() {}
     virtual void onLongClick() {}
