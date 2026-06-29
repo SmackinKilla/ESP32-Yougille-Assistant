@@ -1,6 +1,6 @@
 // HomePage.cpp
 #include "HomePage.h"
-#include <Adafruit_ILI9341.h>
+#include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
 #include <ColorPalette.h>
 
