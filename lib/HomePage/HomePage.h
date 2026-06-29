@@ -9,7 +9,7 @@ const int SCREEN_HEIGHT = 128;
 class HomePage : public Page {
 public:
     HomePage(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
-        : Page(tft, oled), pageManager(pm){}
+        : Page(tft, oled, pm){}
 
     void onShortClick() override;
     void onLongClick() override;
@@ -22,7 +22,7 @@ private:
     PageManager* pageManager;
     void DrawMenu();
     void DrawGUI();
-    int currentIndex = 0;
+    int currentIndex = 1;
     int previousIndex = -1;
     int charOffset = 10;
     int charStart = 18;
