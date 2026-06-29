@@ -1,4 +1,3 @@
-// main.cpp
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
@@ -9,42 +8,46 @@
 #include "HomePage.h"
 #include "ScreenSaver.h"
 #include <string.h>
+#include <OneButton.h>
 
 #define TFT_CS    5    // Chip Select
-#define TFT_DC    16   // Data/Command
-#define TFT_RST   17   // Reset
+#define TFT_DC    2   // Data/Command
+#define TFT_RST   4   // Reset
 #define TFT_BL    32   // Backlight (подсветка)
 #define TFT_SCK   18   // SPI Clock
 #define TFT_MOSI  23   // SPI Data
-
 #define OLED_SDA  21   // I2C Data
 #define OLED_SCL  22   // I2C Clock
 #define OLED_ADDR 0x3C // Адрес OLED экрана
 #define OLED_RST  -1   // Пин Reset (если нет - ставим -1)
-
-#define BUTTON_PIN 4 
-
-
-bool lastButtonState = HIGH;      
-bool currentButtonState = HIGH;   
-uint32_t lastDebounceTime = 0;    
-uint32_t debounceDelay = 50;      
-bool buttonPressed = false; 
+#define BUTTON_PIN 13 
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 Adafruit_SSD1306 oled(128, 64, &Wire, -1);
 
-HomePage homePage(&tft, &oled);
-ScreenSaver screenSaver(&tft, &oled);
+OneButton button(BUTTON_PIN, true);
 PageManager pm;
+HomePage homePage(&tft, &oled, &pm);
+ScreenSaver screenSaver(&tft, &oled);
+
+
+extern "C" void app_main() {
+    setup();
+    for(;;) {
+        loop();
+        vTaskDelay(1);
+    }
+}
 
 void setup() {
     Serial.begin(115200);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     tft.initR(INITR_BLACKTAB);
     tft.setRotation(1);
-    tft.fillScreen(ST7735_BLACK);
+    tft.fillScreen(ILI9341_BLACK);
     oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    button.setClickTicks(300u);
+    button.setPressTicks(500u); 
     pm.addPage(&homePage);
     pm.addPage(&screenSaver);
     pm.getCurrent()->OnEnter();
@@ -52,23 +55,7 @@ void setup() {
 }
 
 void loop() {
-    int reading = digitalRead(BUTTON_PIN);
-    
-    if (reading != lastButtonState) {
-        lastDebounceTime = millis();
-    }
-    
-    if ((millis() - lastDebounceTime) > debounceDelay) {
-        if (reading != currentButtonState) {
-            currentButtonState = reading;
-            
-            if (currentButtonState == LOW) {
-                pm.getCurrent()->onButtonPressed();
-            }
-        }
-    }
-    
-    lastButtonState = reading;
+    button.tick();
 
     static uint32_t lastTime = 0;
     uint32_t now = millis();
