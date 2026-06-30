@@ -11,5 +11,5 @@ class PageManager {
         Page* getCurrent();
     private:
         std::vector<Page*> _pages;
-        uint8_t _currentIndex = 0;
+        int _currentIndex = 0;
 };

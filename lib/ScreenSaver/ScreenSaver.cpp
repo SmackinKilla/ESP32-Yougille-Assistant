@@ -3,7 +3,7 @@
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
 
-void ScreenSaver::OnEnter() { //tipa setup
+void ScreenSaver::OnEnter() { 
 
 }
 
@@ -15,6 +15,3 @@ void ScreenSaver::OnExit() {
 
 }
 
-void ScreenSaver::Draw() { // tyt vse risui
-
-}

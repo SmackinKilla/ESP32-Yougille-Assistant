@@ -11,10 +11,10 @@ public:
 
     void onShortClick() override;
     void onLongClick() override;
+    void onDoubleClick() override;
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
     void OnExit() override;
-    void Draw() override;
     
 private:
     PageManager* pageManager;

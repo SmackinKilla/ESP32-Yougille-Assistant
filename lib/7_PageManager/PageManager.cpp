@@ -29,7 +29,10 @@ void PageManager::SwitchToIndex(int index) {
     if (index < 0 || index >= (int)_pages.size()) return;
     if (index == _currentIndex) return; 
     
-    _pages[_currentIndex]->OnExit();
+    if (_currentIndex >= 0) {
+        _pages[_currentIndex]->OnExit();
+    }
+
     _currentIndex = index;
     _pages[_currentIndex]->OnEnter();
 }

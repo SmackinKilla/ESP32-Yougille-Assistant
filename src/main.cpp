@@ -54,17 +54,24 @@ void setup() {
     tft.fillScreen(ST7735_BLACK);
     oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
-    button.setClickMs(300);
-    button.setPressMs(500);  
+    button.setClickMs(200);
+    button.setPressMs(500); 
+
     button.attachClick([]() {
-        Serial.println("Short click");
-        pm.getCurrent()->onShortClick();
+        Page* p = pm.getCurrent();
+        if (p) p->onShortClick();
+    });
+    
+    button.attachDoubleClick([]() {
+        Page* p = pm.getCurrent();
+        if (p) p->onDoubleClick(); 
     });
     
     button.attachLongPressStart([]() {
-        Serial.println("Long press");
-        pm.getCurrent()->onLongClick();
-    });      
+        Page* p = pm.getCurrent();
+        if (p) p->onLongClick();
+    }); 
+
     pm.addPage(&weatherPage); 
     pm.addPage(&tasksPage);
     pm.addPage(&TZPage); 
@@ -72,7 +79,7 @@ void setup() {
     pm.addPage(&settings); 
     pm.addPage(&homePage);
     pm.addPage(&screenSaver);
-    pm.getCurrent()->OnEnter();
+    pm.SwitchToIndex(5);
 
 }
 
@@ -86,7 +93,6 @@ void loop() {
     
     Page* current = pm.getCurrent();
     current->Update(dt);
-    current->Draw();
     
     delay(16);
 }

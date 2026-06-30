@@ -10,5 +10,5 @@ public:
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
     void OnExit() override;
-    void Draw() override;
+
 };

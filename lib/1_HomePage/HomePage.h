@@ -3,9 +3,6 @@
 #include "Page.h"
 #include "PageManager.h"
 
-const int SCREEN_WIDTH = 160;
-const int SCREEN_HEIGHT = 128;
-
 class HomePage : public Page {
 public:
     HomePage(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
@@ -13,16 +10,16 @@ public:
 
     void onShortClick() override;
     void onLongClick() override;
+    void onDoubleClick() override;
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
     void OnExit() override;
-    void Draw() override;
 
 private:
     PageManager* pageManager;
     void DrawMenu();
     void DrawGUI();
-    int currentIndex = 0;
+    int currentIndex = 1;
     int previousIndex = -1;
     int charOffset = 10;
     int charStart = 18;
