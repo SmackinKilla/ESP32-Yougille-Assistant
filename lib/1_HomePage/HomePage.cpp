@@ -2,10 +2,11 @@
 #include "HomePage.h"
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
+#include "PageManager.h"
 #include "ColorPalette.h"
 
 void HomePage::DrawMenu() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < MENU_COUNT; i++) {
     int y = charStart + charOffset * (i);
     
     if (i == currentIndex) {
@@ -24,12 +25,12 @@ void HomePage::DrawMenu() {
 
 void HomePage::onShortClick() {
     currentIndex++;
-    if (currentIndex >= 5) currentIndex = 0;
+    if (currentIndex >= MENU_COUNT) currentIndex = 0;
     previousIndex = -1;
 }
 
 void HomePage::onLongClick() {
-    _pm->SwitchToIndex(currentIndex);
+    _pm->SwitchToIndex(static_cast<PageIndex>(currentIndex));
 }
 
 void HomePage::onDoubleClick() {

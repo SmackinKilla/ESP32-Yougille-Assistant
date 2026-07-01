@@ -1,0 +1,10 @@
+#include <Adafruit_ST7735.h>
+#include "ColorPalette.h"
+
+uint16_t COLOR_BLUE   = ST77XX_BLUE;
+uint16_t COLOR_WHITE  = ST77XX_WHITE;
+uint16_t COLOR_BLACK  = ST77XX_BLACK;
+uint16_t COLOR_RED    = ST77XX_RED;
+uint16_t COLOR_GREEN  = ST77XX_GREEN;
+uint16_t COLOR_CYAN   = ST77XX_CYAN;
+uint16_t COLOR_YELLOW = ST77XX_YELLOW;

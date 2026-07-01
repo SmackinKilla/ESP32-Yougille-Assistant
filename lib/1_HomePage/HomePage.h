@@ -24,6 +24,7 @@ private:
     int charOffset = 10;
     int charStart = 18;
     int globalTextSize = 1;
+
     const char* menuItems[5] {
         "1. Weather",
         "2. Tasks(0)",
@@ -31,4 +32,5 @@ private:
         "4. Gambling",
         "5. Settings"
     };
+    static constexpr int MENU_COUNT = sizeof(menuItems) / sizeof(menuItems[0]);
 };

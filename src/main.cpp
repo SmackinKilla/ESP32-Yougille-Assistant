@@ -72,14 +72,14 @@ void setup() {
         if (p) p->onLongClick();
     }); 
 
-    pm.addPage(&weatherPage); 
-    pm.addPage(&tasksPage);
-    pm.addPage(&TZPage); 
-    pm.addPage(&minigamesPage);
-    pm.addPage(&settings); 
-    pm.addPage(&homePage);
-    pm.addPage(&screenSaver);
-    pm.SwitchToIndex(5);
+    pm.addPage(PageIndex::WEATHER, &weatherPage); 
+    pm.addPage(PageIndex::TASKS,  &tasksPage);
+    pm.addPage(PageIndex::TIMEZONES, &TZPage); 
+    pm.addPage(PageIndex::GAMES, &minigamesPage);
+    pm.addPage(PageIndex::SETTINGS, &settings); 
+    pm.addPage(PageIndex::HOME, &homePage);
+    pm.addPage(PageIndex::SCREENSAVER, &screenSaver);
+    pm.SwitchToIndex(PageIndex::HOME);
 
 }
 

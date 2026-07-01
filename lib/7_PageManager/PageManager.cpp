@@ -1,38 +1,55 @@
 #include "PageManager.h"
+#include "Page.h"
 
-void PageManager::addPage(Page* page) {
-    _pages.push_back(page);
+PageManager::PageManager() {
+    _pages.fill(nullptr);
 }
 
-void PageManager::next() {
-    if(_pages.empty()) return;
-    _pages[_currentIndex]->OnExit();
-    _currentIndex = (_currentIndex + 1) % _pages.size();
-    _pages[_currentIndex]->OnEnter();
+void PageManager::addPage(PageIndex index, Page* page) {
+    size_t idx = static_cast<size_t>(index);
+    if (idx < _pages.size()) {
+        _pages[idx] = page;
+    }
 }
 
-void PageManager::prev() {
-    if(_pages.empty()) return;
-    _pages[_currentIndex]->OnExit();
-    _currentIndex = (_currentIndex == 0)
-    ? _pages.size() - 1
-    : _currentIndex - 1;
-    _pages[_currentIndex]->OnEnter();
+void PageManager::SwitchToIndex(PageIndex index) {
+    size_t nextIdx = static_cast<size_t>(index);
+    size_t currIdx = static_cast<size_t>(_currentIndex);
+    if (nextIdx >= _pages.size() || !_pages[nextIdx]) return;
+    if (index == _currentIndex) return; 
+    if (currIdx < _pages.size() && _pages[currIdx]) {
+        _pages[currIdx]->OnExit();
+    }
+    _currentIndex = index;
+    _pages[nextIdx]->OnEnter();
 }
 
 Page* PageManager::getCurrent() {
-    return _pages[_currentIndex];
+    return _pages[static_cast<size_t>(_currentIndex)];
 }
 
-void PageManager::SwitchToIndex(int index) {
-    if (_pages.empty()) return;
-    if (index < 0 || index >= (int)_pages.size()) return;
-    if (index == _currentIndex) return; 
+void PageManager::next() {
+    size_t startIdx = static_cast<size_t>(_currentIndex);
+    size_t count = _pages.size();
     
-    if (_currentIndex >= 0) {
-        _pages[_currentIndex]->OnExit();
+    for (size_t i = 1; i <= count; ++i) {
+        size_t nextIdx = (startIdx + i) % count;
+        if (_pages[nextIdx]) {
+            SwitchToIndex(static_cast<PageIndex>(nextIdx));
+            return;
+        }
     }
+}
 
-    _currentIndex = index;
-    _pages[_currentIndex]->OnEnter();
+void PageManager::prev() {
+    size_t startIdx = static_cast<size_t>(_currentIndex);
+    size_t count = _pages.size();
+    
+    for (size_t i = 1; i <= count; ++i) {
+        size_t prevIdx = (startIdx + count - i) % count;
+        if (_pages[prevIdx]) {
+            SwitchToIndex(static_cast<PageIndex>(prevIdx));
+            return;
+        }
+    }
 }
