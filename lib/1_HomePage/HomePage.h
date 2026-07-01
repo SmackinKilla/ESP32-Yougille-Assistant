@@ -18,7 +18,6 @@ public:
 private:
     PageManager* pageManager;
     void DrawMenu();
-    void DrawGUI();
     int currentIndex = 1;
     int previousIndex = -1;
     int charOffset = 10;

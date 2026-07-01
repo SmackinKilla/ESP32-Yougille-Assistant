@@ -3,6 +3,8 @@
 #include <Wire.h>
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
+#include <string.h>
+#include <OneButton.h>
 #include "PageManager.h"
 #include "Page.h"
 #include "WeatherPage.h"
@@ -12,8 +14,8 @@
 #include "SettingsPage.h"
 #include "HomePage.h"
 #include "ScreenSaver.h"
-#include <string.h>
-#include <OneButton.h>
+#include "ColorPalette.h"
+#include "SystemSettings.h"
 
   
 
@@ -51,6 +53,8 @@ void setup() {
     Serial.begin(115200);
     tft.initR(INITR_BLACKTAB);
     tft.setRotation(1);
+    g_settings.theme = Theme::BLUE;
+    applyTheme();                  
     tft.fillScreen(ST7735_BLACK);
     oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
@@ -71,7 +75,6 @@ void setup() {
         Page* p = pm.getCurrent();
         if (p) p->onLongClick();
     }); 
-
     pm.addPage(PageIndex::WEATHER, &weatherPage); 
     pm.addPage(PageIndex::TASKS,  &tasksPage);
     pm.addPage(PageIndex::TIMEZONES, &TZPage); 

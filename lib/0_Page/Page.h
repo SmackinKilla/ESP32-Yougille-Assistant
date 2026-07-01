@@ -18,6 +18,7 @@ public:
 
 protected:
     void DrawFrame(const char* title);
+    void DrawMenu(const char* items[], int count, int currentIndex);
     Adafruit_ST7735* _tft;
     Adafruit_SSD1306* _oled;
     PageManager* _pm; 

@@ -18,4 +18,5 @@ public:
     
 private:
     PageManager* pageManager;
+    void DrawGUI();
 };

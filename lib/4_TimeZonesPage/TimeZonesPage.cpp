@@ -2,7 +2,6 @@
 #include <Adafruit_ST7735.h>
 #include <Adafruit_SSD1306.h>
 #include "PageManager.h"
-#include "config.h"
 
 void  TimeZonesPage::onShortClick() {
     if (_pm) _pm->SwitchToIndex(PageIndex::HOME);  

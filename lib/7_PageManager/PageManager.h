@@ -16,6 +16,16 @@ enum class PageIndex : uint8_t {
     COUNT 
 };
 
+
+struct TitleInfo {
+    PageIndex index; 
+    const char* title;
+    bool hasCounter;
+    TitleInfo(const char* t, bool c) : title(t), hasCounter(c) {}
+};
+
+TitleInfo getTitleInfo(PageIndex index);
+extern const size_t HOME_MENU_COUNT;
 class PageManager {
 public:
     PageManager();
@@ -29,4 +39,5 @@ public:
 private:
     std::array<Page*, static_cast<size_t>(PageIndex::COUNT)> _pages;
     PageIndex _currentIndex = PageIndex::COUNT;
+
 };

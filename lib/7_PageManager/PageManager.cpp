@@ -1,6 +1,17 @@
 #include "PageManager.h"
 #include "Page.h"
 
+TitleInfo getTitleInfo(PageIndex index) {
+    switch (index) {
+        case PageIndex::WEATHER:    return TitleInfo("Weather", false);
+        case PageIndex::TASKS:      return TitleInfo("Tasks", true);
+        case PageIndex::TIMEZONES:  return TitleInfo("Time Zones", false);
+        case PageIndex::GAMES:      return TitleInfo("Gambling", false);
+        case PageIndex::SETTINGS:   return TitleInfo("Settings", false);
+        default:                    return TitleInfo("Unknown", false);
+    }
+}
+
 PageManager::PageManager() {
     _pages.fill(nullptr);
 }
