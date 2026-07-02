@@ -39,3 +39,9 @@ void Page::DrawMenu(const char* items[], int count, int currentIndex) {
         _tft->print(items[i]);
     }
 }
+
+void Page::drawWindow() {
+    _tft->fillRect(43, 40, 100, 63, COLOR_BLACK);
+    _tft->fillRect(33, 30, 100, 63, COLOR_RED);
+    _tft->drawRect(34, 29, 101, 64, COLOR_WHITE); 
+}

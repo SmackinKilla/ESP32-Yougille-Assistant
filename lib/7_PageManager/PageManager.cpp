@@ -4,10 +4,10 @@
 PageManager::PageManager() {
     _pages.fill(nullptr);
     
-    // 🔒 зарезервируем место в векторе чтобы избежать переаллокаций
+
     _menuPages.reserve(MAX_MENU_PAGES);
     
-    // Инициализируем метаданные по умолчанию
+
     for (size_t i = 0; i < _titles.size(); i++) {
         _titles[i] = TitleInfo("Unknown", false, false);
     }
@@ -22,9 +22,8 @@ void PageManager::registerPage(PageIndex index, Page* page, const TitleInfo& inf
     _pages[idx] = page;
     _titles[idx] = info;
     
-    // 🔒 если страница должна быть в меню, добавляем в кэш
+
     if (info.showInMenu) {
-        // защита от переполнения вектора
         if (_menuPages.size() < MAX_MENU_PAGES) {
             _menuPages.push_back(index);
         }
@@ -52,7 +51,6 @@ const TitleInfo& PageManager::getTitleByIndex(PageIndex index) const {
     if (idx < _titles.size()) {
         return _titles[idx];
     }
-    // 🔒 возвращаем статический неизменяемый объект
     static const TitleInfo unknown("Unknown", false, false);
     return unknown;
 }

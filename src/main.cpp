@@ -86,7 +86,7 @@ void setup() {
     pm.registerPage(PageIndex::HOME, &homePage, TitleInfo("Home", false, false));
     pm.registerPage(PageIndex::SCREENSAVER, &screenSaver, TitleInfo("ScreenSaver", false, false));
     
-    pm.SwitchToIndex(PageIndex::HOME);
+    pm.SwitchToIndex(PageIndex::SETTINGS);
 }
 
 void loop() {

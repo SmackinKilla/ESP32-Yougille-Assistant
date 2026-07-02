@@ -7,24 +7,24 @@
 #include <string.h>
 
 void HomePage::DrawMenu() {
-    // 🔒 получаем уже отфильтрованный список видимых страниц
+
     const auto& menuPages = _pm->getMenuPages();
     int menuCount = menuPages.size();
     
-    // 🔒 защита от переполнения
+
     if (menuCount <= 0 || menuCount > MAX_MENU_ITEMS) return;
     
-    // 🔒 СТАТИЧЕСКИЕ МАССИВЫ - избегаем VLA
+
     const char* items[MAX_MENU_ITEMS];
     char buffers[MAX_MENU_ITEMS][32];
-    memset(buffers, 0, sizeof(buffers));  // очищаем буферы
+    memset(buffers, 0, sizeof(buffers));
     
-    // Пробегаемся только по видимым страницам
+
     for (int i = 0; i < menuCount; i++) {
         PageIndex idx = menuPages[i];
         const TitleInfo& info = _pm->getTitleByIndex(idx);
         
-        // 🔒 Форматируем пункт меню с защитой от переполнения
+
         if (info.hasCounter) {
             snprintf(buffers[i], sizeof(buffers[i]), "%d. %.12s(0)", i + 1, info.title);
         } else {

@@ -3,13 +3,22 @@
 #include <Adafruit_ST7735.h>
 #include "PageManager.h"
 
+
+
 void SettingsPage::onShortClick() {
-    _currentIndex++;
-    if (_currentIndex >= SETTINGS_COUNT) _currentIndex = 0;
-    _previousIndex = -1;
+    if (_IsWindowOpen) {
+        _WindowIndex++;
+        if (_WindowIndex >= 3) _WindowIndex = 0;
+        drawWindow();
+    } else {
+        _currentIndex++;
+        if (_currentIndex >= SETTINGS_COUNT) _currentIndex = 0;
+        _previousIndex = -1;
+    }
 }
 
 void SettingsPage::onLongClick() {
+
     switch (_currentIndex) {
         case 0: /* смена темы */ break;
         case 1: /* смена скорости клика */ break;
@@ -19,7 +28,8 @@ void SettingsPage::onLongClick() {
 }
 
 void SettingsPage::onDoubleClick() {
-    if (_pm) _pm->SwitchToIndex(PageIndex::HOME);
+    SettingsPage::OnEnter();
+    //if (_pm) _pm->SwitchToIndex(PageIndex::HOME);
 }
 
 void SettingsPage::OnEnter() {

@@ -17,14 +17,19 @@ public:
 
 private:
     static constexpr int SETTINGS_COUNT = 4;
-    
     const char* _settingsItems[4] = {
         "1. Theme",
         "2. Click Speed",
         "3. Timezone",
         "4. Reset"
     };
-    
+    const char* _themeOptions[5] = {"Blue", "Red", "Purple", "Green", "Dark"};
+    const char* _speedOptions[3] = {"Fast", "Normal", "Slow"};
+    const char* _tzOptions[5] = {"UTC+0", "UTC+1", "UTC+2", "UTC+3", "UTC+4", };
+    const char** _subMenus[SETTINGS_COUNT] = {_themeOptions, _speedOptions, _tzOptions, nullptr};
+    const int _subMenuCounts[SETTINGS_COUNT] = {5, 3, 5, 0};
     int _currentIndex;
     int _previousIndex;
+    bool _IsWindowOpen = false;
+    int _WindowIndex = 0;
 };
