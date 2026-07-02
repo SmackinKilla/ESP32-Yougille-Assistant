@@ -3,9 +3,6 @@
 #include <Adafruit_ST7735.h>
 #include "PageManager.h"
 
-// 🔒 определение статического массива
-const char* SettingsPage::SETTINGS_ITEMS[SettingsPage::SETTINGS_COUNT];
-
 void SettingsPage::onShortClick() {
     _currentIndex++;
     if (_currentIndex >= SETTINGS_COUNT) _currentIndex = 0;
@@ -13,7 +10,6 @@ void SettingsPage::onShortClick() {
 }
 
 void SettingsPage::onLongClick() {
-    // Логика для входа в выбранную настройку
     switch (_currentIndex) {
         case 0: /* смена темы */ break;
         case 1: /* смена скорости клика */ break;
@@ -23,18 +19,17 @@ void SettingsPage::onLongClick() {
 }
 
 void SettingsPage::onDoubleClick() {
-    // Возврат в HOME
     if (_pm) _pm->SwitchToIndex(PageIndex::HOME);
 }
 
 void SettingsPage::OnEnter() {
     DrawFrame("SETTINGS");
-    Page::DrawMenu(SETTINGS_ITEMS, SETTINGS_COUNT, _currentIndex);
+    Page::DrawMenu(_settingsItems, SETTINGS_COUNT, _currentIndex);
 }
 
 void SettingsPage::Update(uint32_t deltaTimeMs) {
     if (_currentIndex != _previousIndex) {
-        Page::DrawMenu(SETTINGS_ITEMS, SETTINGS_COUNT, _currentIndex);
+        Page::DrawMenu(_settingsItems, SETTINGS_COUNT, _currentIndex);
         _previousIndex = _currentIndex;
     }
 }

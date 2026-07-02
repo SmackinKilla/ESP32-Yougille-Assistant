@@ -16,15 +16,15 @@ public:
     void OnExit() override;
 
 private:
-    // 🔒 статические константные строки
     static constexpr int SETTINGS_COUNT = 4;
-    static constexpr const char* SETTINGS_ITEMS[SETTINGS_COUNT] = {
+    
+    const char* _settingsItems[4] = {
         "1. Theme",
         "2. Click Speed",
         "3. Timezone",
         "4. Reset"
     };
     
-    int _currentIndex;      // текущий выбранный пункт
-    int _previousIndex;     // предыдущий индекс (для оптимизации)
+    int _currentIndex;
+    int _previousIndex;
 };
