@@ -22,19 +22,19 @@ void applyTheme() {
             break;
             
         case Theme::RED:
-            COLOR_BG     = 0x5000; 
+            COLOR_BG     = 0x9800; 
             COLOR_TEXT   = ST77XX_WHITE;
             COLOR_ACCENT = ST77XX_YELLOW;
             break;
             
         case Theme::PURPLE:
-            COLOR_BG     = 0x3006; 
+            COLOR_BG     = 0x8030; 
             COLOR_TEXT   = ST77XX_WHITE;
             COLOR_ACCENT = 0xF81F; 
             break;
             
         case Theme::GREEN:
-            COLOR_BG     = ST77XX_BLACK;
+            COLOR_BG     = 0x0d00;
             COLOR_TEXT   = 0x07E0; 
             COLOR_ACCENT = ST77XX_WHITE;
             break;

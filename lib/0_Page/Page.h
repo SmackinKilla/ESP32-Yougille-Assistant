@@ -19,11 +19,11 @@ public:
 protected:
     void DrawFrame(const char* title);
     void DrawMenu(const char* items[], int count, int currentIndex);
-    void drawWindow();
-    void drawWinMenu(const char* winItems[], int count, currentIndex);
+    void drawWinMenu(const char* winItems[], int count, int currentIndex);
+    void drawModalWindow( const char* title, const char* items[], int itemCount, int selectedIdx, int x, int y, int w, int h);
     Adafruit_ST7735* _tft;
     Adafruit_SSD1306* _oled;
     PageManager* _pm; 
     static constexpr int SCREEN_WIDTH  = 160;
-    static constexpr int SCREEN_HEIGHT = 128;
+    static constexpr int SCREEN_HEIGHT = 128; 
 };

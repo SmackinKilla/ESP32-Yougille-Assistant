@@ -40,8 +40,33 @@ void Page::DrawMenu(const char* items[], int count, int currentIndex) {
     }
 }
 
-void Page::drawWindow() {
-    _tft->fillRect(43, 40, 100, 63, COLOR_BLACK);
-    _tft->fillRect(33, 30, 100, 63, COLOR_RED);
-    _tft->drawRect(34, 29, 101, 64, COLOR_WHITE); 
+// Page.cpp
+void Page::drawModalWindow(const char* title, const char* items[], int itemCount, int selectedIdx, int x, int y, int w, int h) {
+    _tft->fillRect(x + 6, y + 6, w, h, COLOR_BLACK);
+    _tft->fillRect(x, y, w, h, COLOR_BG);
+    _tft->drawRect(x, y, w, h, COLOR_TEXT);
+    int contentY = y + 2;
+    if (title != nullptr) {
+        _tft->setTextColor(COLOR_ACCENT);
+        _tft->setTextSize(1);
+        _tft->setCursor(x + 4, contentY);
+        _tft->print(title);
+        contentY += 12; 
+        _tft->drawFastHLine(x + 2, contentY - 2, w - 4, COLOR_TEXT);
+    }
+    int itemHeight = 10;
+    int maxVisible = (y + h - contentY) / itemHeight;
+    for (int i = 0; i < itemCount && i < maxVisible; i++) {
+        int iy = contentY + i * itemHeight;
+        
+        if (i == selectedIdx) {
+            _tft->fillRect(x + 2, iy - 1, w - 4, itemHeight, COLOR_ACCENT);
+            _tft->setTextColor(COLOR_BG);
+        } else {
+            _tft->setTextColor(COLOR_TEXT);
+        }
+        _tft->setCursor(x + 6, iy);
+        _tft->setTextSize(1);
+        _tft->print(items[i]);
+    }
 }

@@ -55,7 +55,7 @@ void HomePage::onLongClick() {
 }
 
 void HomePage::onDoubleClick() {
-    // Зарезервировано для будущих функций
+
 }
 
 void HomePage::OnEnter() {

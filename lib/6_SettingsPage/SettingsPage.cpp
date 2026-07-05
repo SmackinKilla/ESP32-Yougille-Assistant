@@ -3,12 +3,17 @@
 #include <Adafruit_ST7735.h>
 #include "PageManager.h"
 
-
+void SettingsPage::drawWindow() {
+    const char** items = _subMenus[_currentIndex];
+    int count = _subMenuCounts[_currentIndex];
+    if (items == nullptr || count == 0) return;
+    drawModalWindow(_settingsItems[_currentIndex], items, count, _WindowIndex, 33, 30, 100, 63);
+}
 
 void SettingsPage::onShortClick() {
     if (_IsWindowOpen) {
         _WindowIndex++;
-        if (_WindowIndex >= 3) _WindowIndex = 0;
+        if (_WindowIndex >= _subMenuCounts[_currentIndex]) _WindowIndex = 0;
         drawWindow();
     } else {
         _currentIndex++;
@@ -18,18 +23,33 @@ void SettingsPage::onShortClick() {
 }
 
 void SettingsPage::onLongClick() {
+    if (_IsWindowOpen) {
+        switch (_currentIndex) {
+            case 0: g_settings.theme = static_cast<Theme>(_WindowIndex); break;
+            case 1: g_settings.clickSpeed = static_cast<ClickSpeed>(_WindowIndex); break;
+            case 2: g_settings.timezoneOffset = _WindowIndex; break;
+            case 3: g_settings.reset(); break;
+        }
+        g_settings.save();
+        applyTheme();
 
-    switch (_currentIndex) {
-        case 0: /* смена темы */ break;
-        case 1: /* смена скорости клика */ break;
-        case 2: /* смена часового пояса */ break;
-        case 3: /* сброс настроек */ break;
+        _IsWindowOpen = false;
+        OnEnter();
+    } else {
+        if (_subMenus[_currentIndex] != nullptr) {
+            _IsWindowOpen = true;
+            _WindowIndex = 0;
+            drawWindow();
+        } else if (_currentIndex == 3) {
+            g_settings.reset();
+            applyTheme();
+            OnEnter();
+        }
     }
 }
 
 void SettingsPage::onDoubleClick() {
-    SettingsPage::OnEnter();
-    //if (_pm) _pm->SwitchToIndex(PageIndex::HOME);
+    if (_pm) _pm->SwitchToIndex(PageIndex::HOME);
 }
 
 void SettingsPage::OnEnter() {

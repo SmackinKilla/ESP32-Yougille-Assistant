@@ -18,8 +18,8 @@ public:
 private:
     void DrawMenu();
     
-    static constexpr int MAX_MENU_ITEMS = 10;  // 🔒 максимум пунктов в меню
+    static constexpr int MAX_MENU_ITEMS = 10;  
     
-    int _currentIndex;      // текущий выбранный пункт в меню
-    int _previousIndex;     // предыдущий индекс (для оптимизации перерисовки)
+    int _currentIndex;      
+    int _previousIndex; 
 };

@@ -48,11 +48,8 @@ void setup() {
     Serial.begin(115200);
     tft.initR(INITR_BLACKTAB);
     tft.setRotation(1);
-    
-    // Загружаем сохранённые настройки перед применением темы
     g_settings.load();
     applyTheme();
-    
     tft.fillScreen(ST7735_BLACK);
     oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
@@ -74,19 +71,17 @@ void setup() {
         if (p) p->onLongClick();
     }); 
     
-    // 🆕 РЕГИСТРИРУЕМ СТРАНИЦЫ С МЕТАДАННЫМИ
-    // Навигируемые страницы (showInMenu = true)
     pm.registerPage(PageIndex::WEATHER, &weatherPage, TitleInfo("Weather", false, true));
-    pm.registerPage(PageIndex::TASKS, &tasksPage, TitleInfo("Tasks", true, true));      // счётчик!
+    pm.registerPage(PageIndex::TASKS, &tasksPage, TitleInfo("Tasks", true, true));
     pm.registerPage(PageIndex::TIMEZONES, &TZPage, TitleInfo("Time Zones", false, true));
     pm.registerPage(PageIndex::GAMES, &minigamesPage, TitleInfo("Gambling", false, true));
     pm.registerPage(PageIndex::SETTINGS, &settings, TitleInfo("Settings", false, true));
     
-    // Служебные страницы (showInMenu = false)
+ 
     pm.registerPage(PageIndex::HOME, &homePage, TitleInfo("Home", false, false));
     pm.registerPage(PageIndex::SCREENSAVER, &screenSaver, TitleInfo("ScreenSaver", false, false));
     
-    pm.SwitchToIndex(PageIndex::SETTINGS);
+    pm.SwitchToIndex(PageIndex::HOME);
 }
 
 void loop() {

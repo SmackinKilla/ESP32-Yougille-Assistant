@@ -14,8 +14,8 @@ public:
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
     void OnExit() override;
-
 private:
+    void drawWindow();
     static constexpr int SETTINGS_COUNT = 4;
     const char* _settingsItems[4] = {
         "1. Theme",
