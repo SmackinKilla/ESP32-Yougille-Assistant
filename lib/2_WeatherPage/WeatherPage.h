@@ -19,4 +19,5 @@ public:
 private:
     PageManager* pageManager;
     void DrawGUI();
+    void DrawWeatherIcons(int x, int y, int weatherCode);
 };

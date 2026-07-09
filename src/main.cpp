@@ -73,11 +73,9 @@ void setup() {
     
     pm.registerPage(PageIndex::WEATHER, &weatherPage, TitleInfo("Weather", false, true));
     pm.registerPage(PageIndex::TASKS, &tasksPage, TitleInfo("Tasks", true, true));
-    pm.registerPage(PageIndex::TIMEZONES, &TZPage, TitleInfo("Time Zones", false, true));
+    pm.registerPage(PageIndex::TIMEZONES, &TZPage, TitleInfo("World Time", false, true));
     pm.registerPage(PageIndex::GAMES, &minigamesPage, TitleInfo("Gambling", false, true));
     pm.registerPage(PageIndex::SETTINGS, &settings, TitleInfo("Settings", false, true));
-    
- 
     pm.registerPage(PageIndex::HOME, &homePage, TitleInfo("Home", false, false));
     pm.registerPage(PageIndex::SCREENSAVER, &screenSaver, TitleInfo("ScreenSaver", false, false));
     
