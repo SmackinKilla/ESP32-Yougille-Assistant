@@ -1,8 +1,9 @@
 #include "SettingsPage.h"
-#include "ColorPalette.h"
+#include <ColorPalette.h>
 #include <Adafruit_GFX.h>
 #include "PageManager.h"
-
+#include <OneButton.h>
+extern OneButton button;  
 void SettingsPage::drawWindow() {
     const char** items = _subMenus[_currentIndex];
     int count = _subMenuCounts[_currentIndex];
@@ -27,12 +28,16 @@ void SettingsPage::onLongClick() {
         switch (_currentIndex) {
             case 0: g_settings.theme = static_cast<Theme>(_WindowIndex); break;
             case 1: g_settings.clickSpeed = static_cast<ClickSpeed>(_WindowIndex); break;
-            case 2: g_settings.timezoneOffset = _WindowIndex; break;
+            case 2: {
+                    static const uint8_t levels[] = {25, 64, 128, 191, 255};
+                    g_settings.brightness = levels[_WindowIndex];
+                    break;
+            }
             case 3: g_settings.reset(); break;
         }
         g_settings.save();
         applyTheme();
-
+        _displays->setBrightnessAll(g_settings.brightness);
         _IsWindowOpen = false;
         OnEnter();
     } else {
@@ -42,6 +47,7 @@ void SettingsPage::onLongClick() {
             drawWindow();
         } else if (_currentIndex == 3) {
             g_settings.reset();
+            button.setClickMs(getClickMs(g_settings.clickSpeed));
             applyTheme();
             OnEnter();
         }
@@ -65,5 +71,5 @@ void SettingsPage::Update(uint32_t deltaTimeMs) {
 }
 
 void SettingsPage::OnExit() {
-    _tft->fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_BG);
+    screen(0)->fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_BG);
 }

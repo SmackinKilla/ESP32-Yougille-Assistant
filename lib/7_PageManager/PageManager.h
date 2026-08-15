@@ -13,6 +13,7 @@ enum class PageIndex : uint8_t {
     SETTINGS,
     HOME,
     SCREENSAVER,
+    WEATHER1,
     COUNT 
 };
 

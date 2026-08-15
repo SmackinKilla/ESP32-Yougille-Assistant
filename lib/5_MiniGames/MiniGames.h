@@ -1,13 +1,11 @@
 #pragma once
 #include "Page.h"
 #include "PageManager.h"
-class Adafruit_ST7735;
-class Adafruit_SSD1306;
 
 class MiniGames : public Page {
 public:
-    MiniGames(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
-        : Page(tft, oled, pm) {}
+    MiniGames(DisplayManager* displays, PageManager* pm) 
+        : Page(displays, pm) {}
 
     void onShortClick() override;
     void onLongClick() override;
@@ -15,7 +13,4 @@ public:
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;
     void OnExit() override;
-    
-private:
-    PageManager* pageManager;
 };
