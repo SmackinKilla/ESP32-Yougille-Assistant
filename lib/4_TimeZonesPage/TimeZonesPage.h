@@ -6,7 +6,7 @@ class Adafruit_SSD1306;
 
 class TimeZonesPage : public Page {
 public:
-    TimeZonesPage(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
+    TimeZonesPage(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
         : Page(tft, oled, pm) {}
 
     void onShortClick() override;

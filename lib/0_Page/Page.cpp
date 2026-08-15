@@ -1,5 +1,5 @@
 #include "Page.h"
-#include <Adafruit_ST7735.h>
+#include <Adafruit_GFX.h>
 #include "ColorPalette.h"
 
 void Page::DrawFrame(const char* title) {

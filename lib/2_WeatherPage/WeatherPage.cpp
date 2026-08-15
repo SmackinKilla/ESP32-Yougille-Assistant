@@ -1,6 +1,5 @@
 #include "WeatherPage.h"
-#include <Adafruit_ST7735.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_GFX.h>
 #include "PageManager.h"
 #include "WeatherIcons.h"
 #include "ColorPalette.h"
@@ -12,7 +11,7 @@ String currentDescription = "Scattered clouds";
 void WeatherPage::DrawWeatherIcons(int x, int y, int weatherCode) {
     WeatherIcon icon = getIconFromCode(weatherCode);
     const unsigned char* bitmap = getIconBitmap(icon);
-    _tft->drawBitmap(x, y, bitmap, 64, 32, ST7735_WHITE);
+    _tft->drawBitmap(x, y, bitmap, 64, 32, COLOR_WHITE);
 }
 
 

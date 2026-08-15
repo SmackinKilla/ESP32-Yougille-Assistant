@@ -3,7 +3,7 @@
 #include "PageManager.h"
 #include "ColorPalette.h"
 #include <stdio.h>
-#include <Adafruit_ST7735.h>
+#include <Adafruit_GFX.h>
 #include <string.h>
 
 void HomePage::DrawMenu() {

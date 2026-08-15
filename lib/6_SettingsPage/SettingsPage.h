@@ -5,7 +5,7 @@
 
 class SettingsPage : public Page {
 public:
-    SettingsPage(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
+    SettingsPage(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
         : Page(tft, oled, pm), _currentIndex(0), _previousIndex(-1) {}
 
     void onShortClick() override;

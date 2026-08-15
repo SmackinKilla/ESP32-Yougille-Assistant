@@ -1,6 +1,6 @@
 #include "SettingsPage.h"
 #include "ColorPalette.h"
-#include <Adafruit_ST7735.h>
+#include <Adafruit_GFX.h>
 #include "PageManager.h"
 
 void SettingsPage::drawWindow() {

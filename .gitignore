@@ -11,3 +11,4 @@
 *.bak
 .DS_Store
 Thumbs.db
+.native_stubs

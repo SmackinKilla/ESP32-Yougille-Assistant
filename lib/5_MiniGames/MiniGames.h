@@ -6,7 +6,7 @@ class Adafruit_SSD1306;
 
 class MiniGames : public Page {
 public:
-    MiniGames(Adafruit_ST7735* tft, Adafruit_SSD1306* oled, PageManager* pm) 
+    MiniGames(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
         : Page(tft, oled, pm) {}
 
     void onShortClick() override;
