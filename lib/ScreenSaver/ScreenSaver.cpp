@@ -1,7 +1,5 @@
 // ScreenSaver.cpp
 #include "ScreenSaver.h"
-#include <Adafruit_ST7735.h>
-#include <Adafruit_SSD1306.h>
 
 void ScreenSaver::OnEnter() { 
 

@@ -1,13 +1,11 @@
 #pragma once
 #include "Page.h"
 #include "PageManager.h"
-class Adafruit_ST7735;
-class Adafruit_SSD1306;
 
 class WeatherPage : public Page {
 public:
-    WeatherPage(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
-        : Page(tft, oled, pm) {}
+    WeatherPage(DisplayManager* displays, PageManager* pm) 
+        : Page(displays, pm) {}
 
     void onShortClick() override;
     void onLongClick() override;
@@ -17,7 +15,6 @@ public:
     void OnExit() override;
     
 private:
-    PageManager* pageManager;
     void DrawGUI();
     void DrawWeatherIcons(int x, int y, int weatherCode);
 };

@@ -39,7 +39,7 @@ void SystemSettings::load() {
     uint8_t t = prefs.getUChar("theme", (uint8_t)Theme::BLUE);
     uint8_t cs = prefs.getUChar("clkSpd", (uint8_t)ClickSpeed::NORMAL);
 
-    timezoneOffset = prefs.getChar("tz", 3);
+    brightness = prefs.getUChar("bright", 255);
     use24hFormat = prefs.getBool("24h", true);
     prefs.end();
     
@@ -49,9 +49,9 @@ void SystemSettings::load() {
     theme = (Theme)t;
     clickSpeed = (ClickSpeed)cs;
     
-    Serial.printf("[Settings] Loaded: theme=%s, speed=%s, tz=%d, 24h=%d\n",
+    Serial.printf("[Settings] Loaded: theme=%s, speed=%s, Brightness=%d, 24h=%d\n",
                   getThemeName(theme), getClickSpeedName(clickSpeed),
-                  timezoneOffset, use24hFormat);
+                  brightness, use24hFormat);
 }
 
 void SystemSettings::save() {
@@ -59,7 +59,7 @@ void SystemSettings::save() {
     prefs.begin("app", false);  
     prefs.putUChar("theme", (uint8_t)theme);
     prefs.putUChar("clkSpd", (uint8_t)clickSpeed);
-    prefs.putChar("tz", timezoneOffset);
+    prefs.putUChar("bright", brightness);
     prefs.putBool("24h", use24hFormat);
     prefs.end();
     Serial.println("[Settings] Saved to NVS");

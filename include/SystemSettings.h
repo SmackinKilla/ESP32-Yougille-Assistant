@@ -21,9 +21,8 @@ struct SystemSettings {
     Theme theme = Theme::BLUE;
 
     ClickSpeed clickSpeed = ClickSpeed::NORMAL;
-
-    int8_t timezoneOffset = 2;    
     bool use24hFormat = true;
+    uint8_t brightness = 255;
 
     void load();      
     void save();      

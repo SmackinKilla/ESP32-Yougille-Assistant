@@ -8,17 +8,15 @@ enum class DisplayType : uint8_t {
 };
 
 struct DisplayConfig {
+    char name[16];
     DisplayType type;
-
-    uint16_t widht;
+    uint16_t width;
     uint16_t height;
     uint8_t rotation;
-
     int8_t cs;
     int8_t dc;
     int8_t rst;
     int8_t bl;
-
     uint8_t i2cAddr;
     int8_t sda;
     int8_t scl;

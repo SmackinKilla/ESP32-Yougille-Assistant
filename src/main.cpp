@@ -4,8 +4,8 @@
 #include <OneButton.h>
 #include <Adafruit_GFX.h>
 #include "PageManager.h"
-#include "Page.h"
 #include "WeatherPage.h"
+#include "WeatherPage1.h"
 #include "TasksPage.h"
 #include "TimeZonesPage.h"
 #include "MiniGames.h"
@@ -14,47 +14,10 @@
 #include "ScreenSaver.h"
 #include "ColorPalette.h"
 #include "SystemSettings.h"
-
 #include "DisplayManager.h"
-#include "DisplayTypes.h"
-
+#include "BoardConfig.h"
+#include "ConfigServer.h"
 #define BUTTON_PIN 4
-
-static const DisplayConfig DISPLAY_CONFIGS[] = {
-    {
-        DisplayType::ST7735,
-        160,
-        128,
-        1,
-
-        5,
-        16,
-        17,
-        32,
-
-        0,
-        -1,
-        -1
-    },
-
-    {
-        DisplayType::SSD1306,
-        128,
-        64,
-        0,
-
-        -1,
-        -1,
-        -1,
-        -1,
-
-        0x3C,
-        21,
-        22
-    }
-};
-
-static constexpr uint8_t DISPLAY_COUNT = sizeof(DISPLAY_CONFIGS) / sizeof(DISPLAY_CONFIGS[0]);
 
 DisplayManager displays;
 OneButton button(BUTTON_PIN, true);
@@ -62,31 +25,34 @@ PageManager pm;
 
 void setup() {
     Serial.begin(115200);
-
-    if (!displays.begin(DISPLAY_CONFIGS, DISPLAY_COUNT)) {
-        Serial.println("[HW] Display init failed");
-        while (true) {
-            delay(1000);
-        }
+    if (!g_board.load()) {       
+        g_board.setDefaults();   
+        g_board.save();
     }
 
+    if (!displays.begin(g_board.displays, g_board.displayCount)) {
+        Serial.println("[HW] Display init failed");
+        while (true) delay(1000);
+    }
+    ConfigServer::begin();
     g_settings.load();
     applyTheme();
-
-    displays.gfx(0)->fillScreen(COLOR_BG);
+    
+    displays.gfx((uint8_t)0)->fillScreen(COLOR_BG);
     displays.flushAll();
-
-    static WeatherPage weatherPage(displays.gfx(0), displays.gfx(1), &pm);
-    static TasksPage tasksPage(displays.gfx(0), displays.gfx(1), &pm);
-    static TimeZonesPage TZPage(displays.gfx(0), displays.gfx(1), &pm);
-    static MiniGames minigamesPage(displays.gfx(0), displays.gfx(1), &pm);
-    static SettingsPage settings(displays.gfx(0), displays.gfx(1), &pm);
-    static HomePage homePage(displays.gfx(0), displays.gfx(1), &pm);
-    static ScreenSaver screenSaver(displays.gfx(0), displays.gfx(1), &pm);
+    displays.setBrightnessAll(g_settings.brightness);
+    static WeatherPage weatherPage(&displays, &pm);
+    static WeatherPage1 weatherPage1(&displays, &pm);
+    static TasksPage tasksPage(&displays, &pm);
+    static TimeZonesPage TZPage(&displays, &pm);
+    static MiniGames minigamesPage(&displays, &pm);
+    static SettingsPage settings(&displays, &pm);
+    static HomePage homePage(&displays, &pm);
+    static ScreenSaver screenSaver(&displays, &pm);     
 
     pinMode(BUTTON_PIN, INPUT_PULLUP);
 
-    button.setClickMs(200);
+    button.setClickMs(getClickMs(g_settings.clickSpeed));
     button.setPressMs(500);
 
     button.attachClick([]() {
@@ -105,6 +71,7 @@ void setup() {
     });
 
     pm.registerPage(PageIndex::WEATHER, &weatherPage, TitleInfo("Weather", false, true));
+    pm.registerPage(PageIndex::WEATHER1, &weatherPage1, TitleInfo("Weather1", false, false));
     pm.registerPage(PageIndex::TASKS, &tasksPage, TitleInfo("Tasks", true, true));
     pm.registerPage(PageIndex::TIMEZONES, &TZPage, TitleInfo("World Time", false, true));
     pm.registerPage(PageIndex::GAMES, &minigamesPage, TitleInfo("Gambling", false, true));
@@ -118,6 +85,7 @@ void setup() {
 }
 
 void loop() {
+    ConfigServer::loop(); 
     button.tick();
 
     static uint32_t lastTime = 0;

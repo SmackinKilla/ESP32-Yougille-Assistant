@@ -1,7 +1,7 @@
 // HomePage.cpp
 #include "HomePage.h"
 #include "PageManager.h"
-#include "ColorPalette.h"
+#include <ColorPalette.h>
 #include <stdio.h>
 #include <Adafruit_GFX.h>
 #include <string.h>
@@ -71,5 +71,5 @@ void HomePage::Update(uint32_t deltaTimeMs) {
 }
 
 void HomePage::OnExit() {
-    _tft->fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_BG);
+    screen(0)->fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_BG);
 }

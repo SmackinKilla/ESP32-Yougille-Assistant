@@ -11,7 +11,7 @@ class Ssd1306Display final : public IDisplay {
 public:
     explicit Ssd1306Display(const DisplayConfig& cfg)
         : _cfg(cfg),
-          _oled(cfg.widht, cfg.height, &Wire, cfg.rst) {
+          _oled(cfg.width, cfg.height, &Wire, cfg.rst) {
     }
 
     bool begin() override {
@@ -51,6 +51,10 @@ public:
     Adafruit_GFX* gfx() override {
         return &_oled;
     }
+
+    const char* name() const override {
+    return _cfg.name; 
+    } 
 
 private:
     DisplayConfig _cfg;

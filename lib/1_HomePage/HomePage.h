@@ -5,8 +5,8 @@
 
 class HomePage : public Page {
 public:
-    HomePage(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
-        : Page(tft, oled, pm), _currentIndex(0), _previousIndex(-1) {}
+    HomePage(DisplayManager* displays, PageManager* pm) 
+        : Page(displays, pm), _currentIndex(0), _previousIndex(-1) {}
 
     void onShortClick() override;
     void onLongClick() override;

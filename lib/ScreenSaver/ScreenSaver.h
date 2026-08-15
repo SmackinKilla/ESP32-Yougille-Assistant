@@ -4,8 +4,8 @@
 
 class ScreenSaver : public Page {
 public:
-    ScreenSaver(Adafruit_GFX* tft, Adafruit_GFX* oled, PageManager* pm) 
-        : Page(tft, oled, pm) {}
+    ScreenSaver(DisplayManager* displays, PageManager* pm) 
+        : Page(displays, pm) {}
     
     void OnEnter() override;
     void Update(uint32_t deltaTimeMs) override;

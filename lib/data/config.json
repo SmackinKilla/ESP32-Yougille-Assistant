@@ -1,0 +1,9 @@
+{
+    "wifi": { "ssid": "", "pass": "" },
+    "displays": [
+    { "name": "main", "type": "ST7735", "width": 160, "height": 128, "rotation": 1,
+      "cs": 5, "dc": 16, "rst": 17, "bl": 32 },
+    { "name": "oled", "type": "SSD1306", "width": 128, "height": 64, "rotation": 0,
+      "addr": 60, "sda": 21, "scl": 22 }
+  ]
+}
